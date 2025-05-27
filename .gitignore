@@ -1,0 +1,13 @@
+# Rails
+task_collab_api/log/*
+task_collab_api/tmp/*
+task_collab_api/vendor/bundle
+task_collab_api/.env
+
+# Node
+task_collab_frontend/node_modules
+task_collab_frontend/.env
+
+# OS/Editor
+.DS_Store
+*.swp
