@@ -3,6 +3,7 @@ task_collab_api/log/*
 task_collab_api/tmp/*
 task_collab_api/vendor/bundle
 task_collab_api/.env
+.env
 
 # Node
 task_collab_frontend/node_modules
