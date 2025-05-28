@@ -8,16 +8,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get "tasks/index"
       devise_scope :user do
         post 'login', to: 'sessions#create'
         delete 'logout', to: 'sessions#destroy'
       end
-    end
-  end
-    namespace :api do
-    namespace :v1 do
-      resources :tasks, only: [:index]  # 👈 Add this line
+
+      resources :tasks
     end
   end
 end

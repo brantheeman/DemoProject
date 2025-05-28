@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post("http://localhost:3000/api/v1/login", {
-        user: { email, password }
+        user: { email, password },
       });
 
       const { token, user } = response.data;
 
-      // ✅ Store token and user
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // 👉 Optional: set axios default auth header
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-      alert("Login successful");
-      // TODO: Redirect or update app state here
+      
+      navigate("/tasks");
 
     } catch (error) {
       console.error("Login failed", error);
