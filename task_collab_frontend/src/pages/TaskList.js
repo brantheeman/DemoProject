@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { isAdmin } from "../helper/auth";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState([]);
@@ -149,7 +150,18 @@ export default function TaskList() {
               <>
                 <strong>{task.title}</strong> — {task.description}
                 <button onClick={() => handleEdit(task)}>Edit</button>
-                <button onClick={() => handleDelete(task.id)}>Delete</button>
+                {/* <button onClick={() => handleDelete(task.id)}>Delete</button> */}
+                {task.completed ? (
+                  <span> (Completed)</span>
+                ) : (
+                  <span> (Not Completed)</span>
+                )}
+                {task.assigned_to && (
+                  <span> (Assigned to: {task.assigned_to.name})</span>
+                )}
+                {isAdmin() && (
+                  <button onClick={handleDelete}>Delete</button>
+                )}
               </>
             )}
           </li>

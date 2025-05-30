@@ -1,9 +1,13 @@
 class Api::V1::AuthController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authorize_admin!, only: [:some_admin_action]
 
-    def test
-        render json: { message: "Hello, #{current_user.email}" }
-    end
+  def authorize_admin!
+    render json: { error: 'Forbidden' }, status: :forbidden unless current_user&.admin?
+  end
+
+  def test
+      render json: { message: "Hello, #{current_user.email}" }
+  end
 
   # POST /signup
   def signup
